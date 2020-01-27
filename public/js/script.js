@@ -11,10 +11,10 @@ var map = new ol.Map({
     })
 });
 
-var markers = new OpenLayers.Layer.Markers("Markers");
+var markers = new ol.Layer.Markers("Markers");
 map.addLayer(markers);
-var size = new OpenLayers.Size(21,25);
-var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat([-78.938728, 38.280510], "EPSG:3857"),icon));
-markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat([-78.938728, 38.280510], "EPSG:3857"),icon.clone()));
+var size = new ol.Size(21,25);
+var offset = new ol.Pixel(-(size.w/2), -size.h);
+var icon = new ol.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
+markers.addMarker(new ol.Marker(new ol.LonLat([-78.938728, 38.280510], "EPSG:3857"),icon));
+markers.addMarker(new ol.Marker(new ol.LonLat([-78.938728, 38.280510], "EPSG:3857"),icon.clone()));
