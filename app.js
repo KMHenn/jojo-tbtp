@@ -3,9 +3,9 @@ var path = require("path");
 var app = express();
 const port = process.env.PORT || 3000;
 
-app.set("views", path.resolve(__dirname, "views"));
+app.use(express.static(__dirname + '/public'));
+app.set("public", path.resolve(__dirname, "public"));
 app.set("view engine", "ejs");
-
 app.get("/", function(req, res){
     res.redirect("/index");
 });
@@ -17,4 +17,5 @@ app.use(function(request, response) {
     response.end("404!");
 });
   
+{/* <link rel="stylesheet" type="text/css" href="css/style.css" /> */}
 app.listen(port);
