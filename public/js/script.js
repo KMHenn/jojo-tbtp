@@ -33,7 +33,7 @@ var iconStyle = new ol.style.Style({
     anchorXUnits: 'fraction',
     anchorYUnits: 'pixels',
     opacity: 0.75,
-    src: 'data/icon.png'
+    src: 'assets/icon.png'
   }))
 });
 
