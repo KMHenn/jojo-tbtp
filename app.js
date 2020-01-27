@@ -1,7 +1,7 @@
 var express = require("express");
 var path = require("path");
 var app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
