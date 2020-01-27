@@ -17,5 +17,4 @@ app.use(function(request, response) {
     response.end("404!");
 });
   
-{/* <link rel="stylesheet" type="text/css" href="css/style.css" /> */}
 app.listen(port);
