@@ -1,0 +1,19 @@
+{
+  "name": "jojo-tbtp",
+  "version": "1.0.0",
+  "description": "Web assistant for campaign",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "jojo-tbtp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.7.4",
+    "express": "^4.17.1"
+  }
+}
