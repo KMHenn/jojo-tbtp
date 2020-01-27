@@ -11,10 +11,29 @@ var map = new ol.Map({
     })
 });
 
-var markers = new ol.Layer.Markers("Markers");
-map.addLayer(markers);
-var size = new ol.Size(21,25);
-var offset = new ol.Pixel(-(size.w/2), -size.h);
-var icon = new ol.Icon('http://www.openlayers.org/dev/img/marker.png', size, offset);
-markers.addMarker(new ol.Marker(new ol.LonLat([-78.938728, 38.280510], "EPSG:3857"),icon));
-markers.addMarker(new ol.Marker(new ol.LonLat([-78.938728, 38.280510], "EPSG:3857"),icon.clone()));
+var iconFeature = new ol.Feature({
+  geometry: new ol.geom.Point(ol.proj.transform([-78.938728, 38.280510], 'EPSG:4326',     
+  'EPSG:3857')),
+  name: 'Null Island',
+  population: 4000,
+  rainfall: 500
+});
+
+var vectorSource = new ol.source.Vector({
+  features: iconFeatures //add an array of features
+});
+
+var iconStyle = new ol.style.Style({
+  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+    anchor: [0.5, 46],
+    anchorXUnits: 'fraction',
+    anchorYUnits: 'pixels',
+    opacity: 0.75,
+    src: 'data/icon.png'
+  }))
+});
+
+var vectorLayer = new ol.layer.Vector({
+  source: vectorSource,
+  style: iconStyle
+});
