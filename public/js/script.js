@@ -11,29 +11,25 @@ $(document).ready(function(){
   $.get("/getMarkers", function(data, status){
     markers = data.locationLog;
     console.log(markers);
+
     initMap();
     addInteraction();
+  
+    // Get location of map click
+    map.on('click', function(evt){
+      var arr = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+      console.log("Lat: " + arr[1] + "   Lng: " + arr[0]);
+      var label = prompt("Enter a label for the location.", "");
+  
+      if (label !== null && label !== ""){
+        addMarker(arr, label);
+      }    
+    });
   });
 });
+  
 
 
-// Change type of drawable
-typeSelect.onchange = function() {
-  map.removeInteraction(draw);
-  addInteraction();
-};
-
-
-// Get location of map click
-map.on('click', function(evt){
-  var arr = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
-  console.log("Lat: " + arr[1] + "   Lng: " + arr[0]);
-  var label = prompt("Enter a label for the location.", "");
-
-  if (label === null || label === ""){
-    addMarker(arr, label);
-  }    
-});
 
 /**
  * Create the map
@@ -62,10 +58,10 @@ function initMap(){
   console.log(markers.length);
   for (var i = 0; i < markers.length; i++){
     var item = markers[i];
-    console.log(item);
     var lng = item.lng;
     var lat = item.lat;
     var label = item.label;
+    var srcStr = "http://cdn.mapmarker.io/api/v1/pin?text=" + label + "&size=50&hoffset=1";
 
     var iconFeature = new ol.Feature({
       geometry: new ol.geom.Point(ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857'))
@@ -74,7 +70,7 @@ function initMap(){
     var iconStyle = new ol.style.Style({
       image: new ol.style.Icon(({
         anchor: [0.5, 1],
-        src: "http://cdn.mapmarker.io/api/v1/pin?text" + label + "=&size=50&hoffset=1"
+        src: srcStr
       }))
     });
 
@@ -98,16 +94,21 @@ function initMap(){
  * Add user-input marker capability
  */
 function addInteraction() {
-  var value = typeSelect.value;
+  var value = "Point";
   if (value !== 'None') {
     draw = new ol.interaction.Draw({
       source: source,
-      type: typeSelect.value
+      type: "Point"
     });
     map.addInteraction(draw);
   }
 }
 
+/**
+ * Post new marker to server
+ * @param {} arr 
+ * @param {*} label 
+ */
 function addMarker(arr, label){
   $.ajax({
     url: '/addMarker',
