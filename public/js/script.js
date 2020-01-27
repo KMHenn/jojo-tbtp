@@ -41,3 +41,5 @@ var vectorLayer = new ol.layer.Vector({
   source: vectorSource,
   style: iconStyle
 });
+
+map.addLayer(vectorLayer);
