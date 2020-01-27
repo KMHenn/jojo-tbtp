@@ -11,6 +11,8 @@ var map = new ol.Map({
     })
 });
 
+var iconFeatures = [];
+
 var iconFeature = new ol.Feature({
   geometry: new ol.geom.Point(ol.proj.transform([-78.938728, 38.280510], 'EPSG:4326',     
   'EPSG:3857')),
@@ -18,6 +20,8 @@ var iconFeature = new ol.Feature({
   population: 4000,
   rainfall: 500
 });
+
+iconFeatures.push(iconFeature);
 
 var vectorSource = new ol.source.Vector({
   features: iconFeatures //add an array of features
