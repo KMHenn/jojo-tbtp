@@ -6,7 +6,7 @@ var map = new ol.Map({
       })
     ],
     view: new ol.View({
-      center: ol.proj.fromLonLat([-36.8646, 76.0431]),
+      center: ol.proj.fromLonLat([-36.8646, -76.0431]),
       zoom: 4
     })
   });
